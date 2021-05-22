@@ -10,6 +10,19 @@ function filterPokemon(name, type) {
     return listafiltrada;
 }
 
+async function fetchPokemonsAsync() {
+    const response = await fetch("https://borgesdn.github.io/pokedex-source/pokedex.json");
+
+    pokemonList = await response.json();
+}
+
+async function getPokemonAsync(id) {
+
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    let pokemon = await response.json();
+}
+
+
 function sortPokemon(filteredList, sortExpression) {
     let listaOrdenada = [];
 

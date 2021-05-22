@@ -1,9 +1,19 @@
 $(document).ready(function () {
-  let pokemonTypes = ["bug", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water", "dark"]
-
+ 
   const request = new XMLHttpRequest();
   const metodo = "GET";
   const url = "https://borgesdn.github.io/pokedex-source/pokedex.json";
+
+  fetch("https://pokeapi.co/api/v2/type")
+    .then(response => response.json())
+    .then(json => {
+      const pokemonTypes = json.results.map(function (type){
+        return type.name
+      })
+      loadTypes(pokemonTypes);// console.log(pokemonTypes) 
+    })
+    .catch(erro => console.log(erro));
+
 
   request.open(metodo, url);
   request.addEventListener("readystatechange", function () {    
@@ -191,6 +201,4 @@ $(document).ready(function () {
       )
       .join('')
   }
-
-  loadTypes(pokemonTypes)
 });
